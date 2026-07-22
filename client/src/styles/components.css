@@ -1,0 +1,172 @@
+/* ============================================================================
+   MODAL — création / édition de note et confirmation de suppression
+   ============================================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(28, 31, 30, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 100;
+  animation: overlay-in var(--transition-base) ease both;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-6);
+  animation: modal-in var(--transition-base) ease both;
+}
+
+.modal-box.modal-small {
+  max-width: 400px;
+}
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.modal-header h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xl);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-ink-faint);
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: var(--space-1);
+}
+.modal-close:hover {
+  color: var(--color-ink);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.confirm-text {
+  color: var(--color-ink-soft);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-2);
+}
+
+.confirm-text strong {
+  color: var(--color-ink);
+}
+
+/* ============================================================================
+   TOASTS
+   ============================================================================ */
+.toast-container {
+  position: fixed;
+  top: var(--space-5);
+  right: var(--space-5);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: min(90vw, 360px);
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  box-shadow: var(--shadow-raised);
+  animation: toast-in var(--transition-base) ease both;
+  border: 1px solid transparent;
+}
+
+.toast-success {
+  background-color: var(--color-success-soft);
+  color: var(--color-success);
+  border-color: rgba(47, 107, 58, 0.25);
+}
+
+.toast-error {
+  background-color: var(--color-danger-soft);
+  color: var(--color-danger);
+  border-color: rgba(166, 64, 46, 0.25);
+}
+
+/* ============================================================================
+   LOADER
+   ============================================================================ */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.page-loader {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+
+.page-loader .spinner {
+  width: 32px;
+  height: 32px;
+  border-color: var(--color-border-strong);
+  border-top-color: var(--color-accent);
+}
+
+/* ============================================================================
+   PAGE 404
+   ============================================================================ */
+.not-found-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+}
+
+.not-found-page .code {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 5rem;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.not-found-page h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.not-found-page p {
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-5);
+}

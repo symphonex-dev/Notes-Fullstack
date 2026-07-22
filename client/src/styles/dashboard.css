@@ -1,0 +1,287 @@
+/* ============================================================================
+   DASHBOARD
+   ============================================================================ */
+.navbar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-4);
+  gap: var(--space-4);
+}
+
+.navbar .wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: var(--text-xl);
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.navbar-user .user-name {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.navbar-user .user-name strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.dashboard-main {
+  flex: 1;
+  padding-block: var(--space-6);
+}
+
+/* ============================================================================
+   EN-TÊTE DE PAGE — titre "Notes" + compteur en badge juste en dessous.
+   Avant, le compteur vivait seul dans la barre d'outils (voir plus bas),
+   coincé entre la recherche et le bouton, sans réel point d'ancrage visuel.
+   ============================================================================ */
+.dashboard-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.dashboard-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-2xl);
+  color: var(--color-ink);
+}
+
+/* Badge discret : pastille arrondie de faible contraste, dans la teinte
+   accent du projet plutôt qu'un simple texte gris perdu dans la page. */
+.dashboard-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.dashboard-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+  max-width: 420px;
+}
+
+.search-box input {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem 1rem 0.75rem 2.35rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.search-box input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 0 0 3px var(--color-accent-soft);
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: #4a524f;
+  opacity: 1;
+}
+
+/* Icône loupe positionnée à l'intérieur, à gauche du champ (voir
+   SearchBar.jsx). `pointer-events: none` : l'icône est purement
+   décorative, elle ne doit jamais intercepter un clic destiné au champ
+   texte situé juste en dessous d'elle. */
+.search-box .search-icon {
+  position: absolute;
+  top: 50%;
+  left: 0.85rem;
+  transform: translateY(-50%);
+  color: var(--color-ink-faint);
+  pointer-events: none;
+}
+
+/* Grille responsive de notes : de 1 colonne (mobile) à 3+ colonnes (desktop) */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-5);
+}
+
+.note-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  animation: card-in var(--transition-base) ease both;
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+  position: relative;
+}
+
+.note-card:hover {
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-2px);
+}
+
+.note-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.note-card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
+  word-break: break-word;
+}
+
+.note-card-content {
+  color: var(--color-ink-soft);
+  font-size: var(--text-sm);
+  flex: 1;
+  margin-bottom: var(--space-4);
+  white-space: pre-wrap;
+  word-break: break-word;
+  /* Tronque visuellement le contenu au-delà de 5 lignes */
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.note-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed var(--color-border);
+  padding-top: var(--space-3);
+}
+
+.note-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.note-card-actions {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--color-ink-faint);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.icon-btn:hover {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.icon-btn.danger:hover {
+  background-color: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+/* État vide : invite à l'action plutôt que simple message */
+.empty-state {
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  color: var(--color-ink-soft);
+}
+
+.empty-state .empty-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-ink);
+  margin-bottom: var(--space-2);
+}
+
+.empty-state .empty-hint {
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-5);
+}
+
+/* ============================================================================
+   RESPONSIVE — 320 / 375 / 768 / 1024 / 1440
+   ============================================================================ */
+@media (max-width: 480px) {
+  .navbar-inner {
+    flex-wrap: wrap;
+  }
+  .navbar-user .user-name {
+    display: none; /* on garde uniquement le bouton de déconnexion sur très petit écran */
+  }
+  .dashboard-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .search-box {
+    max-width: none;
+  }
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .notes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .notes-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

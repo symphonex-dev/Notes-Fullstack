@@ -1,0 +1,183 @@
+/* ============================================================================
+   AUTH — pages Login / Register
+   Signature visuelle : la carte reprend le motif "fiche de catalogue" —
+   deux perforations en haut, un intitulé en Fraunces italique — repris
+   ensuite sur les cartes de notes du Dashboard pour unifier l'identité.
+   ============================================================================ */
+.auth-page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6) var(--space-4);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-6) var(--space-6) var(--space-6);
+  position: relative;
+}
+
+/* Les deux perforations en haut de la fiche : motif signature du projet */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 32px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-bg);
+  box-shadow: 28px 0 0 var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: var(--space-6);
+}
+
+.auth-brand .wordmark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: var(--text-2xl);
+  color: var(--color-ink);
+}
+
+.auth-brand .tagline {
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+  margin-top: var(--space-1);
+}
+
+.auth-card h1 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+}
+
+.auth-card .subtitle {
+  color: var(--color-ink-soft);
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-5);
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-ink-soft);
+}
+
+.auth-switch a {
+  font-weight: 600;
+  text-decoration: none;
+  /* Espacement demandé entre "?" et le lien : on utilise `margin-left`
+     plutôt que d'ajouter des espaces bruts dans le JSX ("Créer un
+     compte" précédé de "   "). C'est un piège classique du HTML : le
+     navigateur FUSIONNE automatiquement tous les espaces consécutifs
+     en un seul lors du rendu (règle de "collapsing whitespace"). Taper
+     trois espaces dans le texte n'aurait donc rigoureusement aucun
+     effet visuel — seul le CSS (margin/padding) donne un espacement
+     fiable et contrôlable. */
+  margin-left: var(--space-2);
+}
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   CHAMP MOT DE PASSE — conteneur du bouton "afficher / masquer" (œil)
+   Utilisé par le composant PasswordField.jsx, sur Login ET Register.
+   ============================================================================ */
+.password-field {
+  /* `position: relative` : ce conteneur devient le point de repère pour
+     le bouton œil positionné en `absolute` juste en dessous — technique
+     CSS standard pour superposer une icône "dans" un champ de saisie. */
+  position: relative;
+}
+
+.password-field input {
+  width: 100%;
+  /* Espace réservé à droite pour que le texte tapé ne passe jamais
+     SOUS le bouton œil, même avec un mot de passe long. */
+  padding-right: 2.4rem;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 0.4rem;
+  /* `translateY(-50%)` centre verticalement le bouton quel que soit la
+     hauteur exacte du champ, sans avoir à calculer une valeur en pixels
+     à la main. */
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--color-ink-faint);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.password-toggle-btn:hover {
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+}
+
+/* ============================================================================
+   LIEN "MOT DE PASSE OUBLIÉ" (factice) — Login uniquement
+   ============================================================================ */
+.forgot-password-row {
+  display: flex;
+  justify-content: flex-end;
+  /* Négatif ici pour "remonter" le lien juste sous le champ mot de passe,
+     en compensant une partie du `margin-bottom` déjà posé par `.field` :
+     sans ça, le lien semblerait trop détaché du champ auquel il se
+     rapporte. */
+  margin-top: calc(var(--space-4) * -1);
+  margin-bottom: var(--space-3);
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: var(--color-accent);
+}
+
+.forgot-password-warning {
+  background-color: var(--color-danger-soft);
+  color: var(--color-danger);
+  border: 1px solid rgba(166, 64, 46, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-xs);
+  margin-bottom: var(--space-4);
+}
+
+@media (max-width: 375px) {
+  .auth-card {
+    padding: var(--space-5) var(--space-4);
+  }
+}
