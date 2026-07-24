@@ -19,7 +19,7 @@ Une application full stack de prise de notes où chaque utilisateur crée un com
 ## 🛠️ Tech Stack
 * **Frontend :** React, Vite, React Router DOM, Axios, Context API
 * **Backend :** Node.js, Express, PostgreSQL, JWT, bcrypt
-* **Déploiement :** Vercel
+* **Déploiement :** Vercel (Frontend), Render (Backend)
 
 ## 💻 Installation & Lancement en local
 1. Cloner le dépôt :
