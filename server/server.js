@@ -13,7 +13,7 @@ pool
   .query("SELECT 1")
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`✅ API Notes démarrée sur http://localhost:${PORT}`);
+      console.log(`✅ API Notes démarrée sur le port ${PORT}`);
     });
   })
   .catch((err) => {

@@ -6,14 +6,26 @@ import { notFoundHandler, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
 
-// CORS : seule l'origine du frontend (CLIENT_URL) est autorisée à appeler
-// cette API depuis un navigateur. Sans ce middleware, React ne pourrait
-// pas faire de requêtes vers l'API (port différent = origine différente).
+// Liste des origines autorisées pour éviter tout blocage CORS en production et local
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://notes-fullstack-symphonex.vercel.app",
+  process.env.CLIENT_URL
+].filter(Boolean); // Filtre les valeurs indéfinies
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: function (origin, callback) {
+      // Autorise les requêtes sans origine (comme les outils Postman ou mobile) et les domaines de la liste
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(null, true); // En développement/déploiement, on laisse passer pour éviter les rejets stricts
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
   })
 );
 
