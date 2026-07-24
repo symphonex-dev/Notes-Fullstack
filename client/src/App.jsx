@@ -8,15 +8,6 @@ import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
-// ============================================================================
-// COMPARAISON JS vanille vs React :
-// En JS classique, "changer de page" veut souvent dire changer réellement
-// de fichier HTML (login.html, dashboard.html...), avec un rechargement
-// complet du navigateur. Ici, <BrowserRouter> intercepte la navigation :
-// une seule page HTML (index.html) reste chargée, et React échange
-// simplement le composant affiché selon l'URL — c'est le principe de la
-// Single Page Application (SPA).
-// ============================================================================
 export default function App() {
   return (
     <AuthProvider>

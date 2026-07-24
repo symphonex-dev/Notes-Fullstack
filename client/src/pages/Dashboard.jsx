@@ -44,12 +44,8 @@ export default function Dashboard() {
       <main className="dashboard-main">
         <div className="container">
           {/* ==================================================================
-              En-tête de page : titre "Notes" + compteur juste en dessous.
-              Avant, le compteur ("2 notes") vivait seul au milieu de la
-              barre d'outils (entre la recherche et le bouton), perdu
-              visuellement. Il est maintenant rattaché au titre, comme un
-              sous-titre/badge — sa place naturelle dans une mise en page
-              "titre de page + métadonnée". */}
+              En-tête de page : titre "Notes" + compteur en badge pill.
+              ================================================================== */}
           <div className="dashboard-header">
             <h1 className="dashboard-title">Notes</h1>
             <span className="dashboard-count">

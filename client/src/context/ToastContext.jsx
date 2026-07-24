@@ -17,7 +17,7 @@ export function ToastProvider({ children }) {
     // Auto-disparition après 4 secondes, comme un vrai toast d'interface.
     setTimeout(() => {
       setToasts((current) => current.filter((toast) => toast.id !== id));
-    }, 4000);
+    }, 1000);
   }, []);
 
   return (

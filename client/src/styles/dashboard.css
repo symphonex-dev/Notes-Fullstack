@@ -44,12 +44,10 @@
 
 /* ============================================================================
    EN-TÊTE DE PAGE — titre "Notes" + compteur en badge juste en dessous.
-   Avant, le compteur vivait seul dans la barre d'outils (voir plus bas),
-   coincé entre la recherche et le bouton, sans réel point d'ancrage visuel.
    ============================================================================ */
 .dashboard-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-bottom: var(--space-5);
@@ -60,11 +58,14 @@
   font-weight: 600;
   font-size: var(--text-2xl);
   color: var(--color-ink);
+  margin: 0;
+  line-height: 1;
 }
 
-/* Badge discret : pastille arrondie de faible contraste, dans la teinte
-   accent du projet plutôt qu'un simple texte gris perdu dans la page. */
+/* Badge discret type "pill" */
 .dashboard-count {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-accent);
@@ -74,6 +75,7 @@
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  transform: translateY(5px); /* Décalage optique précis pour compenser la hauteur de la police serif */
 }
 
 .dashboard-toolbar {
@@ -260,7 +262,7 @@
     flex-wrap: wrap;
   }
   .navbar-user .user-name {
-    display: none; /* on garde uniquement le bouton de déconnexion sur très petit écran */
+    display: none;
   }
   .dashboard-toolbar {
     flex-direction: column;
