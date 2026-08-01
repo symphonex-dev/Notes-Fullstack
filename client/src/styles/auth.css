@@ -10,6 +10,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-6) var(--space-4);
+  position: relative;
 }
 
 .auth-card {
@@ -19,11 +20,22 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-raised);
-  padding: var(--space-6) var(--space-6) var(--space-6);
+  padding: var(--space-6);
   position: relative;
 }
 
-/* Les deux perforations en haut de la fiche : motif signature du projet */
+/* Positionnement discret du bouton de thème dans le coin supérieur droit de la carte */
+.card-theme-toggle {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  padding: 0.25rem 0.5rem;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-sm);
+  z-index: 2;
+}
+
+/* Les deux perforations en haut à gauche de la fiche : motif signature du projet */
 .auth-card::before {
   content: "";
   position: absolute;
@@ -61,6 +73,7 @@
   font-weight: 600;
   font-size: var(--text-xl);
   margin-bottom: var(--space-1);
+  color: var(--color-ink);
 }
 
 .auth-card .subtitle {
@@ -79,15 +92,8 @@
 .auth-switch a {
   font-weight: 600;
   text-decoration: none;
-  /* Espacement demandé entre "?" et le lien : on utilise `margin-left`
-     plutôt que d'ajouter des espaces bruts dans le JSX ("Créer un
-     compte" précédé de "   "). C'est un piège classique du HTML : le
-     navigateur FUSIONNE automatiquement tous les espaces consécutifs
-     en un seul lors du rendu (règle de "collapsing whitespace"). Taper
-     trois espaces dans le texte n'aurait donc rigoureusement aucun
-     effet visuel — seul le CSS (margin/padding) donne un espacement
-     fiable et contrôlable. */
   margin-left: var(--space-2);
+  color: var(--color-accent);
 }
 .auth-switch a:hover {
   text-decoration: underline;
@@ -98,16 +104,11 @@
    Utilisé par le composant PasswordField.jsx, sur Login ET Register.
    ============================================================================ */
 .password-field {
-  /* `position: relative` : ce conteneur devient le point de repère pour
-     le bouton œil positionné en `absolute` juste en dessous — technique
-     CSS standard pour superposer une icône "dans" un champ de saisie. */
   position: relative;
 }
 
 .password-field input {
   width: 100%;
-  /* Espace réservé à droite pour que le texte tapé ne passe jamais
-     SOUS le bouton œil, même avec un mot de passe long. */
   padding-right: 2.4rem;
 }
 
@@ -115,9 +116,6 @@
   position: absolute;
   top: 50%;
   right: 0.4rem;
-  /* `translateY(-50%)` centre verticalement le bouton quel que soit la
-     hauteur exacte du champ, sans avoir à calculer une valeur en pixels
-     à la main. */
   transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
@@ -143,10 +141,6 @@
 .forgot-password-row {
   display: flex;
   justify-content: flex-end;
-  /* Négatif ici pour "remonter" le lien juste sous le champ mot de passe,
-     en compensant une partie du `margin-bottom` déjà posé par `.field` :
-     sans ça, le lien semblerait trop détaché du champ auquel il se
-     rapporte. */
   margin-top: calc(var(--space-4) * -1);
   margin-bottom: var(--space-3);
 }

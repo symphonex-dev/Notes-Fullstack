@@ -8,6 +8,7 @@ Une application full stack de prise de notes où chaque utilisateur crée un com
 ## ✨ Fonctionnalités clés
 * Inscription et connexion sécurisées, avec mots de passe hachés via bcrypt et jamais stockés en clair
 * Authentification par token JWT, avec routes protégées côté client et côté serveur
+* Mode Sombre (Dark Mode) dynamique avec détection automatique et persistance du choix utilisateur
 * Création, modification et suppression de notes (CRUD complet)
 * Isolation totale des données : chaque utilisateur ne peut voir et modifier que ses propres notes
 * Recherche instantanée dans les notes, par titre et par contenu

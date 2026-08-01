@@ -1,10 +1,32 @@
 /* ============================================================================
+   NAVBAR — Bouton de changement de thème
+   ============================================================================ */
+.theme-toggle-btn {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-ink);
+  font-size: var(--text-base);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--color-surface-raised);
+  border-color: var(--color-border-strong);
+}
+
+/* ============================================================================
    MODAL — création / édition de note et confirmation de suppression
    ============================================================================ */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(28, 31, 30, 0.45);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,6 +45,7 @@
   box-shadow: var(--shadow-raised);
   padding: var(--space-6);
   animation: modal-in var(--transition-base) ease both;
+  border: 1px solid var(--color-border);
 }
 
 .modal-box.modal-small {
@@ -40,6 +63,7 @@
   font-family: var(--font-display);
   font-weight: 600;
   font-size: var(--text-xl);
+  color: var(--color-ink);
 }
 
 .modal-close {
@@ -164,6 +188,7 @@
   font-size: var(--text-xl);
   margin-top: var(--space-3);
   margin-bottom: var(--space-2);
+  color: var(--color-ink);
 }
 
 .not-found-page p {

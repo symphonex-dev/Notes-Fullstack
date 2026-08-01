@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.js";
 import { useToast } from "../hooks/useToast.js";
+import { useTheme } from "../context/ThemeContext.jsx";
 import PasswordField from "../components/PasswordField.jsx";
 import {
   validateName,
@@ -14,6 +15,7 @@ import {
 export default function Register() {
   const { register } = useAuth();
   const { showToast } = useToast();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
@@ -56,6 +58,17 @@ export default function Register() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        {/* Bouton de thème placé directement dans la carte en haut à droite */}
+        <button
+          type="button"
+          className="theme-toggle-btn card-theme-toggle"
+          onClick={toggleTheme}
+          aria-label={`Passer au mode ${theme === "light" ? "sombre" : "clair"}`}
+          title={`Passer au mode ${theme === "light" ? "sombre" : "clair"}`}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         <div className="auth-brand">
           <div className="wordmark">Notes</div>
           <p className="tagline">Vos idées, organisées.</p>
@@ -98,22 +111,12 @@ export default function Register() {
             {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
           </div>
 
-          {/* Mot de passe et confirmation : deux instances indépendantes du
-              même composant PasswordField. Chacune gère son propre bouton
-              œil sans interférer avec l'autre, grâce à son propre useState
-              interne (voir PasswordField.jsx). */}
           <PasswordField
             id="password"
             label="Mot de passe"
             value={form.password}
             onChange={handleChange("password")}
             placeholder="6 caractères minimum"
-            // "new-password" (et non "current-password") : c'est la valeur
-            // sémantique correcte pour un champ de CRÉATION de mot de
-            // passe, elle indique au navigateur qu'il ne doit pas proposer
-            // un mot de passe déjà enregistré, mais éventuellement en
-            // suggérer un nouveau — comportement attendu sur un formulaire
-            // d'inscription.
             autoComplete="new-password"
             error={fieldErrors.password}
           />

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.js";
 import { useToast } from "../hooks/useToast.js";
+import { useTheme } from "../context/ThemeContext.jsx";
 import PasswordField from "../components/PasswordField.jsx";
 import { validateEmail, extractErrorMessage } from "../utils/validators.js";
 
 export default function Login() {
   const { login } = useAuth();
   const { showToast } = useToast();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({ email: "", password: "" });
@@ -16,15 +18,7 @@ export default function Login() {
   const [submitting, setSubmitting] = useState(false);
 
   // ==========================================================================
-  // "Mot de passe oublié" est un lien FACTICE demandé pour cette démo : il
-  // n'appelle aucune route backend (pas d'envoi d'e-mail). On se contente
-  // d'un état booléen local qui affiche un message d'avertissement. C'est
-  // une bonne illustration de la différence JS vanille / React :
-  // - En JS vanille, on ferait un `element.style.display = "block"` en
-  //   manipulant le DOM directement.
-  // - En React, on ne touche jamais le DOM à la main : on change une valeur
-  //   d'état (`showForgotWarning`), et c'est React qui décide de (re)afficher
-  //   ou non le message en conséquence, lors du prochain rendu.
+  // "Mot de passe oublié" est un lien FACTICE pour cette démo.
   // ==========================================================================
   const [showForgotWarning, setShowForgotWarning] = useState(false);
 
@@ -61,6 +55,17 @@ export default function Login() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        {/* Bouton de thème placé directement dans la carte en haut à droite */}
+        <button
+          type="button"
+          className="theme-toggle-btn card-theme-toggle"
+          onClick={toggleTheme}
+          aria-label={`Passer au mode ${theme === "light" ? "sombre" : "clair"}`}
+          title={`Passer au mode ${theme === "light" ? "sombre" : "clair"}`}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
+
         <div className="auth-brand">
           <div className="wordmark">Notes</div>
           <p className="tagline">Vos idées, organisées.</p>
@@ -89,9 +94,6 @@ export default function Login() {
             {fieldErrors.email && <span className="field-error">{fieldErrors.email}</span>}
           </div>
 
-          {/* Champ mot de passe : on délègue au composant réutilisable
-              PasswordField, qui gère lui-même le bouton œil et le
-              placeholder propre (fini les "••••••••" par défaut). */}
           <PasswordField
             id="password"
             label="Mot de passe"
@@ -102,11 +104,6 @@ export default function Login() {
             error={fieldErrors.password}
           />
 
-          {/* Lien factice "Mot de passe oublié ?", aligné à droite,
-              juste au-dessus du bouton de connexion. Un <button> plutôt
-              qu'un <a href="#">, car il ne mène nulle part : utiliser un
-              vrai lien avec un href bidon serait trompeur pour les
-              lecteurs d'écran et les moteurs de recherche. */}
           <div className="forgot-password-row">
             <button
               type="button"
